@@ -1,0 +1,52 @@
+【Task】Extract all __global__ kernel functions from the following CUDA code
+
+【Extraction Requirements】
+1. Extract the complete definition of all __global__ kernel functions
+2. Extract the complete definition of all __device__ functions called directly or indirectly by kernels
+3. Extract all macro definitions (#define) used by the kernels
+4. Keep all system header #include statements (e.g., <cuda_runtime.h>)
+5. Do not keep any user-defined header #include statements (e.g., "custom.h")
+6. Correctly identify and extract template kernels (template<typename T> __global__ void ...)
+7. Correctly identify and extract template device functions
+8. Ensure the extracted code snippets are self-contained (except for user-defined headers)
+
+
+【Important】
+- Each kernel's func_content must include complete dependencies to make it independently compilable as much as possible
+- If multiple kernels use the same device function, allow duplicating that device function in multiple extraction results
+- Only extract macros directly used by kernels, do not extract unrelated macros
+- func_signature should contain the complete function signature (including template parameters, return type, function name, parameter list)
+- When the source file contains multiple kernels, create a separate object for each kernel in the "kernels" array, with array length equal to the number of extracted kernels; do not merge or omit.
+
+【Output Format】
+Return strict JSON format, do not include any other text:
+{{
+  "source_file": "original file path",
+  "kernels": [
+    {{
+      "func_name": "kernel function name",
+      "func_signature": "complete function signature",
+      "func_content": "complete compilable code"
+    }},
+    {{
+      "func_name": "kernel function name 2",
+      "func_signature": "complete function signature 2",
+      "func_content": "complete compilable code 2"
+    }}
+  ]
+}}
+
+If the file contains no kernel functions, return:
+{{
+  "source_file": "original file path",
+  "kernels": []
+}}
+
+【Input Code】
+File path: {file_path}
+
+```cuda
+{code_content}
+```
+
+【Output】Directly output JSON, do not add any explanations or markers:

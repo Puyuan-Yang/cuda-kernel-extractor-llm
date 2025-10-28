@@ -1,0 +1,24 @@
+{
+  "providers": {
+    "openai": {
+      "api_key": "bdecd15bd6a348d9bb8f7daf6cd023b1",
+      "provider": "openai",
+      "model_id": "dvue-aoai-001-gpt-4.1",
+      "base_url": "https://llm-api.amd.com",
+      "api_version": "2024-06-01",
+      "temperature": 0.1,
+      "max_tokens": 12288,
+      "max_retries": 3,
+      "timeout_seconds": 120
+    },
+    "anthropic": {
+      "api_key": "YOUR_ANTHROPIC_API_KEY",
+      "provider": "anthropic",
+      "model_id": "claude-3-sonnet-20240229",
+      "temperature": 0.1,
+      "max_tokens": 12288,
+      "max_retries": 3,
+      "timeout_seconds": 120
+    }
+  }
+} 
